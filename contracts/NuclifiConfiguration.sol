@@ -4,11 +4,16 @@ pragma solidity ^0.8.9;
 
 import {Address} from "@openzeppelin/contracts/utils/Address.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import {Errors} from "./libraries/Errors.sol";
 import {INuclifiConfiguration} from "./interfaces/INuclifiConfiguration.sol";
 
-contract NuclifiConfiguration is INuclifiConfiguration, Ownable {
+contract NuclifiConfiguration is
+    INuclifiConfiguration,
+    Ownable,
+    ReentrancyGuard
+{
     using Address for address;
 
     uint256 public constant override PERCENTAGE_PRECISION = 1e18;
@@ -21,7 +26,7 @@ contract NuclifiConfiguration is INuclifiConfiguration, Ownable {
     function setStrategyFactoryAddress(
         uint256 strategyId_,
         address strategyFactoryAddress_
-    ) external override onlyOwner {
+    ) external override nonReentrant onlyOwner {
         emit StrategyFactoryAddressChanged(
             strategyId_,
             strategyFactoryAddress[strategyId_],

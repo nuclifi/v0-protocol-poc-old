@@ -4,11 +4,12 @@ pragma solidity ^0.8.9;
 
 import {Address} from "@openzeppelin/contracts/utils/Address.sol";
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import {Errors} from "./libraries/Errors.sol";
 import {INuclifiCertificate} from "./interfaces/INuclifiCertificate.sol";
 
-contract NuclifiCertificate is INuclifiCertificate, ERC721 {
+contract NuclifiCertificate is INuclifiCertificate, ERC721, ReentrancyGuard {
     using Address for address;
 
     uint256 public override certificateId;
@@ -31,6 +32,7 @@ contract NuclifiCertificate is INuclifiCertificate, ERC721 {
     function purchaseCertificate(address to_)
         external
         override
+        nonReentrant
         returns (bool, uint256)
     {
         _requireCallerIsNuclifiControllerAddress();
@@ -46,6 +48,7 @@ contract NuclifiCertificate is INuclifiCertificate, ERC721 {
     function redeemCertificate(uint256 certificateId_)
         external
         override
+        nonReentrant
         returns (bool, uint256)
     {
         _requireCallerIsNuclifiControllerAddress();
