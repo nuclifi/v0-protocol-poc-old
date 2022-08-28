@@ -115,6 +115,12 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
             certificateStrategyAddress[certificateId_]
         );
         strategy.redeem();
+
+        (
+            bool _success, /* uint256 certificateId */
+
+        ) = nuclifiCertificate.redeemCertificate(certificateId_);
+        require(_success, Errors.TX_FAILED);
     }
 
     function withdraw(uint256 certificateId_, uint256 amount_)

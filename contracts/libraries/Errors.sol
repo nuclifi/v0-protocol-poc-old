@@ -14,6 +14,8 @@ library Errors {
     string public constant STRATEGY_DOES_NOT_EXIST = "05";
     string public constant CERTIFICATE_DOES_NOT_EXIST = "06";
     string public constant CERTIFICATE_ID_ALREADY_SET = "10";
+    string public constant CANNOT_WITHDRAW_ENTIRE_AMOUNT_WITHOUT_REDEEMING =
+        "11";
 
     string public constant ZERO_VALUE_FOUND = "07";
     string public constant VALUES_NOT_EQUAL = "08";
