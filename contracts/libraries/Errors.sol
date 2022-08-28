@@ -10,6 +10,7 @@ library Errors {
     string public constant SENDER_NOT_CERTIFICATE_OWNER = "04";
     string public constant SENDER_NOT_NUCLIFI_CONTROLLER = "03";
 
+    string public constant STRATEGY_BALANCE_LOW = "11";
     string public constant STRATEGY_DOES_NOT_EXIST = "05";
     string public constant CERTIFICATE_DOES_NOT_EXIST = "06";
     string public constant CERTIFICATE_ID_ALREADY_SET = "10";
