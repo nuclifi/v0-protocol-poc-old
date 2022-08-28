@@ -18,8 +18,8 @@ contract NuclifiController is INuclifiController, Ownable {
     using SafeERC20 for IERC20;
     using SafeMath for uint256;
 
-    uint256 public override totalValueLocked;
     address public override purchasingToken;
+    uint256 public override totalValueLocked;
 
     mapping(uint256 => address) public override certificateStrategyAddress;
 

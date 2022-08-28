@@ -32,5 +32,4 @@ interface INuclifiController {
         returns (address);
 
     event NuclifiCertificateAddressChanged(address nuclifiCertificateAddr_);
-    event MockStakingFactoryAddressChanged(address mockStakingFactoryAddr_);
 }

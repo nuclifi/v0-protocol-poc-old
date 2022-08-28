@@ -37,9 +37,27 @@ interface INuclifiConfiguration {
         address strategyFactoryAddress_
     ) external;
 
+    function setClaimFeePercentage(uint256 claimFeePercentage_) external;
+
+    function setRedeemFeePercentage(uint256 redeemFeePercentage_) external;
+
+    function setPurchaseFeePercentage(uint256 purchaseFeePercentage_) external;
+
     event StrategyFactoryAddressChanged(
         uint256 indexed strategyId_,
         address oldAddress_,
         address newAddress_
+    );
+    event ClaimFeePercentageChanged(
+        uint256 previousPercentage_,
+        uint256 currentPercentage_
+    );
+    event RedeemFeePercentageChanged(
+        uint256 previousPercentage_,
+        uint256 currentPercentage_
+    );
+    event PurchaseFeePercentageChanged(
+        uint256 previousPercentage_,
+        uint256 currentPercentage_
     );
 }

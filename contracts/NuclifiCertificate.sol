@@ -68,7 +68,7 @@ contract NuclifiCertificate is INuclifiCertificate, ERC721, ReentrancyGuard {
     function _requireCallerIsNuclifiControllerAddress() internal view {
         require(
             _msgSender() == nuclifiControllerAddress,
-            Errors.SENDER_NOT_AUTHORIZED
+            Errors.SENDER_NOT_NUCLIFI_CONTROLLER
         );
     }
 }

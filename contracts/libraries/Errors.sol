@@ -12,8 +12,10 @@ library Errors {
 
     string public constant STRATEGY_DOES_NOT_EXIST = "05";
     string public constant CERTIFICATE_DOES_NOT_EXIST = "06";
+    string public constant CERTIFICATE_ID_ALREADY_SET = "10";
 
     string public constant ZERO_VALUE_FOUND = "07";
     string public constant VALUES_NOT_EQUAL = "08";
     string public constant VALUE_LESS_THAN_MINIMUM_REQUIRED = "09";
+    string public constant VALUE_MORE_THAN_MAXIMUM_PERMITTED = "10";
 }

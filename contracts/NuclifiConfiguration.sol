@@ -35,4 +35,56 @@ contract NuclifiConfiguration is
 
         strategyFactoryAddress[strategyId_] = strategyFactoryAddress_;
     }
+
+    function setClaimFeePercentage(uint256 claimFeePercentage_)
+        external
+        override
+        nonReentrant
+        onlyOwner
+    {
+        _requirePercentageNot100(claimFeePercentage_);
+
+        emit ClaimFeePercentageChanged(
+            claimFeePercentage,
+            claimFeePercentage_
+        );
+        claimFeePercentage = claimFeePercentage_;
+    }
+
+    function setRedeemFeePercentage(uint256 redeemFeePercentage_)
+        external
+        override
+        nonReentrant
+        onlyOwner
+    {
+        _requirePercentageNot100(redeemFeePercentage_);
+
+        emit RedeemFeePercentageChanged(
+            redeemFeePercentage,
+            redeemFeePercentage_
+        );
+        redeemFeePercentage = redeemFeePercentage_;
+    }
+
+    function setPurchaseFeePercentage(uint256 purchaseFeePercentage_)
+        external
+        override
+        nonReentrant
+        onlyOwner
+    {
+        _requirePercentageNot100(purchaseFeePercentage_);
+
+        emit PurchaseFeePercentageChanged(
+            purchaseFeePercentage_,
+            purchaseFeePercentage_
+        );
+        purchaseFeePercentage = purchaseFeePercentage_;
+    }
+
+    function _requirePercentageNot100(uint256 percentage_) internal pure {
+        require(
+            percentage_ < PERCENTAGE_PRECISION,
+            Errors.VALUE_MORE_THAN_MAXIMUM_PERMITTED
+        );
+    }
 }
