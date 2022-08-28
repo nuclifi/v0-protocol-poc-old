@@ -13,6 +13,7 @@ contract MockERC20 is ERC20 {
         uint8 decimals_
     ) ERC20(name_, symbol_) {
         _decimals = decimals_;
+        _mint(msg.sender, (1e18 * 10**_decimals));
     }
 
     function mint(address account, uint256 amount) public {

@@ -22,7 +22,6 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
     using SafeMath for uint256;
 
     address public override purchasingToken;
-    uint256 public override totalValueLocked;
 
     mapping(uint256 => address) public override certificateStrategyAddress;
 
@@ -88,6 +87,7 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
             .purchaseCertificate(_msgSender());
         require(_success, Errors.TX_FAILED);
 
+        strategy.setCertificateId(certificateId);
         certificateStrategyAddress[certificateId] = _strategyAddress;
         emit StrategyLinked(certificateId, strategyId_, _strategyAddress);
 
@@ -101,6 +101,7 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
 
     function claim(uint256 certificateId_) external override nonReentrant {
         _requireCallerIsCertificateOwner(certificateId_);
+
         INuclifiStrategy strategy = INuclifiStrategy(
             certificateStrategyAddress[certificateId_]
         );
@@ -109,6 +110,7 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
 
     function redeem(uint256 certificateId_) external override nonReentrant {
         _requireCallerIsCertificateOwner(certificateId_);
+
         INuclifiStrategy strategy = INuclifiStrategy(
             certificateStrategyAddress[certificateId_]
         );
@@ -121,6 +123,7 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
         nonReentrant
     {
         _requireCallerIsCertificateOwner(certificateId_);
+
         INuclifiStrategy strategy = INuclifiStrategy(
             certificateStrategyAddress[certificateId_]
         );

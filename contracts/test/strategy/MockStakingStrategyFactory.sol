@@ -49,7 +49,7 @@ contract MockStakingStrategyFactory is
         stakingProgramAddress = stakingProgramAddress_;
 
         emit NuclifiControllerAddressChanged(nuclifiControllerAddress_);
-        nuclifiControllerAddress = nuclifiControllerAddress;
+        nuclifiControllerAddress = nuclifiControllerAddress_;
 
         emit NuclifiCertificateAddressChanged(nuclifiCertificateAddress_);
         nuclifiCertificateAddress = nuclifiCertificateAddress_;

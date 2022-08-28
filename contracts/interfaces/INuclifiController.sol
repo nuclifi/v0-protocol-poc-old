@@ -20,11 +20,6 @@ interface INuclifiController {
 
     function purchase(uint256 strategyId_, uint256 amount_) external;
 
-    function totalValueLocked()
-        external
-        view
-        returns (uint256 totalValueLocked_);
-
     function purchasingToken()
         external
         view
