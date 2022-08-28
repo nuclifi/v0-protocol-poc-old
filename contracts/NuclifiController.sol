@@ -116,6 +116,7 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
         );
         strategy.redeem();
 
+        delete certificateStrategyAddress[certificateId_];
         (
             bool _success, /* uint256 certificateId */
 
