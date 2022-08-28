@@ -114,6 +114,8 @@ async function main() {
     30 * 86400,
   ]);
 
+  await usdc.approve(nuclifiController.address, '10000000000000000000000000000000', { gasPrice });
+
   await nuclifiConfiguration.setStrategyFactoryAddress(
     1,
     usdcRewardStakingStrategyFactory.address,
