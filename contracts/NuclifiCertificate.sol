@@ -16,7 +16,7 @@ contract NuclifiCertificate is INuclifiCertificate, ERC721, ReentrancyGuard {
     address public immutable override nuclifiControllerAddress;
 
     constructor(address nuclifiControllerAddress_)
-        ERC721("Nucli.fi Certificate", "N.Fi")
+        ERC721("Nucli.fi POC Certificate", "N.Fi")
     {
         require(
             nuclifiControllerAddress_.isContract(),
