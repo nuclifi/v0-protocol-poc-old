@@ -6,6 +6,20 @@ import {INuclifiCertificate} from "./INuclifiCertificate.sol";
 import {INuclifiConfiguration} from "./INuclifiConfiguration.sol";
 
 interface INuclifiController {
+    function claim(uint256 certificateId_) external;
+
+    function redeem(uint256 certificateId_) external;
+
+    function withdraw(uint256 certificateId_, uint256 amount_) external;
+
+    function setAddresses(
+        address purchasingTokenAddress_,
+        address nuclifiCertificateAddress_,
+        address nuclifiConfigurationAddress_
+    ) external;
+
+    function purchase(uint256 strategyId_, uint256 amount_) external;
+
     function totalValueLocked()
         external
         view
@@ -31,5 +45,14 @@ interface INuclifiController {
         view
         returns (address);
 
-    event NuclifiCertificateAddressChanged(address nuclifiCertificateAddr_);
+    event PurchasingTokenAddressChanged(address purchasingTokenAddress_);
+    event NuclifiCertificateAddressChanged(address nuclifiCertificateAddress_);
+    event NuclifiConfigurationAddressChanged(
+        address nuclifiConfigurationAddress_
+    );
+    event StrategyLinked(
+        uint256 certificateId_,
+        uint256 strategyId_,
+        address strategy_
+    );
 }

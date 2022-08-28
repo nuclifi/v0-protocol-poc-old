@@ -73,6 +73,7 @@ contract MockStakingStrategyFactory is
             )
         );
 
+        emit StrategyDeployed(address(strategy));
         return address(strategy);
     }
 

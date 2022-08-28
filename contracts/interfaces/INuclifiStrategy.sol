@@ -8,9 +8,11 @@ import {INuclifiCertificate} from "./INuclifiCertificate.sol";
 interface INuclifiStrategy {
     function claim() external;
 
+    function redeem() external;
+
     function invest(uint256 amount_) external;
 
-    function redeem(uint256 amount_) external;
+    function withdraw(uint256 amount_) external;
 
     function setCertificateId(uint256 certificateId_) external;
 

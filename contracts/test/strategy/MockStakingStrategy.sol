@@ -75,7 +75,7 @@ contract MockStakingStrategy is INuclifiStrategy, ReentrancyGuard {
         stakingProgram.stake(amount_);
     }
 
-    function redeem(uint256 amount_) public override nonReentrant {
+    function withdraw(uint256 amount_) external override nonReentrant {
         _requireCallerIsNuclifiControllerAddress();
         _requireValueIsNonZero(amount_);
 
@@ -87,7 +87,21 @@ contract MockStakingStrategy is INuclifiStrategy, ReentrancyGuard {
         stakingProgramStakeToken.safeTransfer(_certificateOwner, amount_);
     }
 
-    function claim() public override nonReentrant {
+    function redeem() external override nonReentrant {
+        _requireCallerIsNuclifiControllerAddress();
+
+        uint256 _amount = stakingProgram.balanceOf(address(this));
+        _requireValueIsNonZero(_amount);
+
+        emit Redeemed(_amount);
+        stakingProgram.withdraw(_amount);
+
+        address _certificateOwner = certificateOwner();
+        emit RedemptionSent(_certificateOwner, _amount);
+        stakingProgramStakeToken.safeTransfer(_certificateOwner, _amount);
+    }
+
+    function claim() external override nonReentrant {
         _requireCallerIsNuclifiControllerAddress();
 
         address _certificateOwner = certificateOwner();
