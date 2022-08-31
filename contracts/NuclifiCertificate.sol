@@ -102,7 +102,7 @@ contract NuclifiCertificate is
     {
         require(
             index < ERC721.balanceOf(owner),
-            "ERC721Enumerable: owner index out of bounds"
+            Errors.OWNER_INDEX_OUT_OF_BOUNDS
         );
         return _ownedTokens[owner][index];
     }
@@ -117,10 +117,7 @@ contract NuclifiCertificate is
         override
         returns (uint256)
     {
-        require(
-            index < this.totalSupply(),
-            "ERC721Enumerable: global index out of bounds"
-        );
+        require(index < this.totalSupply(), Errors.GLOBAL_INDEX_OUT_OF_BOUNDS);
         return _allTokens[index];
     }
 

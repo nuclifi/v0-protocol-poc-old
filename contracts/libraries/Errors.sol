@@ -21,4 +21,7 @@ library Errors {
     string public constant VALUES_NOT_EQUAL = "08";
     string public constant VALUE_LESS_THAN_MINIMUM_REQUIRED = "09";
     string public constant VALUE_MORE_THAN_MAXIMUM_PERMITTED = "10";
+
+    string public constant OWNER_INDEX_OUT_OF_BOUNDS = "11";
+    string public constant GLOBAL_INDEX_OUT_OF_BOUNDS = "12";
 }
