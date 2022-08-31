@@ -23,7 +23,9 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
 
     address public override purchasingToken;
 
-    mapping(uint256 => address) public override certificateStrategyAddress;
+    mapping(uint256 => CertificateStrategy)
+        public
+        override certificateStrategy;
 
     INuclifiCertificate public override nuclifiCertificate;
     INuclifiConfiguration public override nuclifiConfiguration;
@@ -88,7 +90,10 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
         require(_success, Errors.TX_FAILED);
 
         strategy.setCertificateId(certificateId);
-        certificateStrategyAddress[certificateId] = _strategyAddress;
+        certificateStrategy[certificateId] = CertificateStrategy({
+            strategyId: strategyId_,
+            strategyAddress: _strategyAddress
+        });
         emit StrategyLinked(certificateId, strategyId_, _strategyAddress);
 
         IERC20(purchasingToken).transferFrom(
@@ -103,7 +108,7 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
         _requireCallerIsCertificateOwner(certificateId_);
 
         INuclifiStrategy strategy = INuclifiStrategy(
-            certificateStrategyAddress[certificateId_]
+            certificateStrategy[certificateId_].strategyAddress
         );
         strategy.claim();
     }
@@ -112,11 +117,11 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
         _requireCallerIsCertificateOwner(certificateId_);
 
         INuclifiStrategy strategy = INuclifiStrategy(
-            certificateStrategyAddress[certificateId_]
+            certificateStrategy[certificateId_].strategyAddress
         );
         strategy.redeem();
 
-        delete certificateStrategyAddress[certificateId_];
+        delete certificateStrategy[certificateId_];
         (
             bool _success, /* uint256 certificateId */
 
@@ -132,7 +137,7 @@ contract NuclifiController is INuclifiController, Ownable, ReentrancyGuard {
         _requireCallerIsCertificateOwner(certificateId_);
 
         INuclifiStrategy strategy = INuclifiStrategy(
-            certificateStrategyAddress[certificateId_]
+            certificateStrategy[certificateId_].strategyAddress
         );
         strategy.withdraw(amount_);
     }

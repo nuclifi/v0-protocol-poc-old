@@ -6,6 +6,11 @@ import {INuclifiCertificate} from "./INuclifiCertificate.sol";
 import {INuclifiConfiguration} from "./INuclifiConfiguration.sol";
 
 interface INuclifiController {
+    struct CertificateStrategy {
+        uint256 strategyId;
+        address strategyAddress;
+    }
+
     function claim(uint256 certificateId_) external;
 
     function redeem(uint256 certificateId_) external;
@@ -35,10 +40,10 @@ interface INuclifiController {
         view
         returns (INuclifiConfiguration nuclifiConfiguration_);
 
-    function certificateStrategyAddress(uint256 certificateId_)
+    function certificateStrategy(uint256 certificateId_)
         external
         view
-        returns (address);
+        returns (uint256, address);
 
     event PurchasingTokenAddressChanged(address purchasingTokenAddress_);
     event NuclifiCertificateAddressChanged(address nuclifiCertificateAddress_);
